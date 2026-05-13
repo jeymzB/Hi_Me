@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday 💖</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  height:100vh;
+  overflow:hidden;
+  background:#000;
+}
+
+/* BACKGROUND */
+.wrapper{
+  display:flex;
+  height:100vh;
+  width:100%;
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
+
+.panel{
+  flex:1;
+  background-repeat:no-repeat;
+  background-position:center;
+  background-size:cover;
+  filter: brightness(0.75) saturate(1.2);
+}
+
+.left{ background-image:url("sokoleyt.jpg"); }
+.center{ background-image:url("my.jpg"); }
+.right{ background-image:url("Neg.jpg"); }
+
+/* MOBILE */
+@media (max-width: 768px){
+  .wrapper{ display:block; }
+  .panel{ display:none; }
+
+  .panel.center{
+    display:block;
+    width:100%;
+    height:100vh;
+    background-size:contain;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-color:#ffc0cb;
+  }
+}
+
+/* OVERLAY */
+.overlay{
+  position:fixed;
+  inset:0;
+  background: rgba(0,0,0,0.55);
+  z-index:1;
+}
+
+/* BUTTONS */
+.top-buttons{
+  position:fixed;
+  top:15px;
+  left:15px;
+  right:15px;
+  display:flex;
+  justify-content:space-between;
+  z-index:5;
+}
+
+.top-buttons button{
+  padding:10px 16px;
+  border:none;
+  border-radius:12px;
+  cursor:pointer;
+  font-size:14px;
+  color:white;
+  background:rgba(105, 158, 255, 0.5);
+}
+
+/* GIFT */
+.gift{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  font-size:60px;
+  cursor:pointer;
+  z-index:6;
+  animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-15px);}
+}
+
+/* POPUP */
+.popup{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%) scale(0);
+  background:rgba(105, 123, 255, 0.25);
+  backdrop-filter:blur(10px);
+  color:white;
+  padding:20px;
+  border-radius:15px;
+  text-align:left;
+  font-size:15px;
+  width:90%;
+  max-width:500px;
+  max-height:80vh;
+  overflow:auto;
+  z-index:10;
+  transition:0.5s ease;
+  box-shadow:0 0 25px rgba(68, 112, 233, 0.6);
+}
+
+.popup.show{
+  transform:translate(-50%,-50%) scale(1);
+}
+
+/* HEARTS */
+.heart{
+  position:fixed;
+  font-size:20px;
+  animation:floatUp 3s linear forwards;
+  z-index:9;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0); opacity:1;}
+  100%{transform:translateY(-300px); opacity:0;}
+}
+
+/* EXPLOSION */
+.tulip{
+  position:fixed;
+  font-size:22px;
+  z-index:99999;
+  pointer-events:none;
+  animation:explode 1.2s ease-out forwards;
+}
+
+@keyframes explode{
+  0%{transform:translate(0,0) scale(1); opacity:1;}
+  100%{transform:translate(var(--x), var(--y)) scale(0.6) rotate(360deg); opacity:0;}
+}
+
+/* GLOW TEXT */
+.glow-text{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:clamp(30px,6vw,70px);
+  font-weight:bold;
+  color:#487af8;
+  text-align:center;
+  z-index:99999;
+  opacity:0;
+  animation:glowShow 3s ease forwards;
+  text-shadow:
+    0 0 10px #3e73f9,
+    0 0 20px #2e66f3,
+    0 0 40px #0e40c0,
+    0 0 80px #032e99
+}
+
+@keyframes glowShow{
+  0%{opacity:0; transform:translate(-50%,-50%) scale(0.5);}
+  50%{opacity:1; transform:translate(-50%,-50%) scale(1.2);}
+  100%{opacity:0; transform:translate(-50%,-50%) scale(1);}
+}
+
+.closeBtn{
+  margin-top:15px;
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  background:#3e73f9;
+  color:white;
+  cursor:pointer;
+  display:block;
+  margin:auto;
+}
+</style>
+
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div class="wrapper">
+  <div class="panel left"></div>
+  <div class="panel center"></div>
+  <div class="panel right"></div>
+</div>
+
+<div class="overlay"></div>
+
+<div class="top-buttons">
+  <button onclick="goPrev()">⬅ Prev</button>
+  <button onclick="goClose()">✖ Close</button>
+</div>
+
+<div class="gift" onclick="openGift()">💌</div>
+
+<div class="popup" id="popup">
+
+Happiest Birthday to the man I love the most!😘😍<br><br>
+
+May this day bring you every happiness your heart can hold,<br>
+I love you deeper every single day 🥰<br><br>
+
+Hope to see you soon, sorry for not being present on this special day of yours mi amore ❤️<br><br>
+
+Again happy birthday bully! ♥️🎂<br><br>
+
+I love you so much po kahit (ansakit mo mahalin) ♥️😘😍🥰<br><br>
+
+<div style="text-align:center; font-weight:bold; color:#39c8e8; line-height:1.6;">
+
+Happy birthday love love! 💖<br>
+Happy birthday love loveeee! 🎉<br>
+Happy birthday happy birthdayyyyy 🎂<br>
+Happy birthday to youu 💐💙
+
+</div>
+
+<button class="closeBtn" onclick="closePopup()">Close 💌</button>
+
+</div>
+
+<script>
+
+const music = document.getElementById("bgMusic");
+
+function openGift(){
+  music.currentTime = 40;
+  music.volume = 1;
+  music.play();
+
+  document.getElementById("popup").classList.add("show");
+
+  for(let i=0;i<70;i++){
+    let h = document.createElement("div");
+    h.classList.add("heart");
+    h.innerHTML = ["💖","💙","💘","🌷","🌹","💐"][Math.floor(Math.random()*6)];
+    h.style.left = Math.random()*100 + "vw";
+    h.style.top = "80vh";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),4000);
+  }
+
+  tulipExplosion();
+  showGlowText();
+}
+
+function tulipExplosion(){
+  const cx = window.innerWidth/2;
+  const cy = window.innerHeight/2;
+
+  const icons = ["🌷","💖","🌹","💐","💘"];
+
+  for(let i=0;i<80;i++){
+    let el = document.createElement("div");
+    el.classList.add("tulip");
+    el.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+
+    document.body.appendChild(el);
+
+    let angle = Math.random()*2*Math.PI;
+    let dist = Math.random()*300;
+
+    el.style.left = cx + "px";
+    el.style.top = cy + "px";
+
+    el.style.setProperty("--x", Math.cos(angle)*dist + "px");
+    el.style.setProperty("--y", Math.sin(angle)*dist + "px");
+
+    setTimeout(()=>el.remove(),1200);
+  }
+}
+
+function showGlowText(){
+  let txt = document.createElement("div");
+  txt.classList.add("glow-text");
+  txt.innerHTML = "I LOVE YOU TOPAK 💖";
+  document.body.appendChild(txt);
+  setTimeout(()=>txt.remove(),3000);
+}
+
+function closePopup(){
+  document.getElementById("popup").classList.remove("show");
+  music.pause();
+  music.currentTime = 0;
+}
+
+function goPrev(){ window.location.href="Hi me.html"; }
+function goClose(){ window.location.href="Intro.html"; }
+
+</script>
+
+</body>
+</html>
