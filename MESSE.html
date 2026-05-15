@@ -79,6 +79,7 @@ body{
   font-size:14px;
   color:white;
   background:rgba(105, 158, 255, 0.5);
+  backdrop-filter:blur(5px);
 }
 
 /* GIFT */
@@ -104,14 +105,15 @@ body{
   left:50%;
   transform:translate(-50%,-50%) scale(0);
   background:rgba(105, 123, 255, 0.25);
-  backdrop-filter:blur(10px);
+  backdrop-filter:blur(12px);
   color:white;
-  padding:20px;
-  border-radius:15px;
+  padding:22px;
+  border-radius:18px;
   text-align:left;
   font-size:15px;
+  line-height:1.7;
   width:90%;
-  max-width:500px;
+  max-width:520px;
   max-height:80vh;
   overflow:auto;
   z-index:10;
@@ -132,8 +134,14 @@ body{
 }
 
 @keyframes floatUp{
-  0%{transform:translateY(0); opacity:1;}
-  100%{transform:translateY(-300px); opacity:0;}
+  0%{
+    transform:translateY(0);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-300px);
+    opacity:0;
+  }
 }
 
 /* EXPLOSION */
@@ -146,8 +154,16 @@ body{
 }
 
 @keyframes explode{
-  0%{transform:translate(0,0) scale(1); opacity:1;}
-  100%{transform:translate(var(--x), var(--y)) scale(0.6) rotate(360deg); opacity:0;}
+  0%{
+    transform:translate(0,0) scale(1);
+    opacity:1;
+  }
+  100%{
+    transform:translate(var(--x), var(--y))
+    scale(0.6)
+    rotate(360deg);
+    opacity:0;
+  }
 }
 
 /* GLOW TEXT */
@@ -158,34 +174,45 @@ body{
   transform:translate(-50%,-50%);
   font-size:clamp(30px,6vw,70px);
   font-weight:bold;
-  color:#487af8;
+  color:#4da6ff;
   text-align:center;
   z-index:99999;
   opacity:0;
   animation:glowShow 3s ease forwards;
   text-shadow:
-    0 0 10px #3e73f9,
-    0 0 20px #2e66f3,
-    0 0 40px #0e40c0,
-    0 0 80px #032e99
+    0 0 10px #4da6ff,
+    0 0 20px #4da6ff,
+    0 0 40px #0066ff,
+    0 0 80px #003399;
 }
 
 @keyframes glowShow{
-  0%{opacity:0; transform:translate(-50%,-50%) scale(0.5);}
-  50%{opacity:1; transform:translate(-50%,-50%) scale(1.2);}
-  100%{opacity:0; transform:translate(-50%,-50%) scale(1);}
+  0%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(0.5);
+  }
+  50%{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1.2);
+  }
+  100%{
+    opacity:0;
+    transform:translate(-50%,-50%) scale(1);
+  }
 }
 
 .closeBtn{
-  margin-top:15px;
-  padding:10px 15px;
+  margin-top:20px;
+  padding:10px 18px;
   border:none;
-  border-radius:10px;
-  background:#3e73f9;
+  border-radius:12px;
+  background:#4da6ff;
   color:white;
   cursor:pointer;
   display:block;
-  margin:auto;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:15px;
 }
 </style>
 
@@ -213,10 +240,10 @@ body{
 
 <div class="popup" id="popup">
 
-Happiest Birthday to the man I love the most!😘😍<br><br>
+Happiest Birthday to the man I love the most! 😘😍<br><br>
 
 May this day bring you every happiness your heart can hold,<br>
-I love you deeper every single day 🥰<br><br>
+I love you deeper every single day 🥰💙<br><br>
 
 Hope to see you soon, sorry for not being present on this special day of yours mi amore ❤️<br><br>
 
@@ -224,7 +251,23 @@ Again happy birthday bully! ♥️🎂<br><br>
 
 I love you so much po kahit (ansakit mo mahalin) ♥️😘😍🥰<br><br>
 
-<div style="text-align:center; font-weight:bold; color:#39c8e8; line-height:1.6;">
+Love sobrang saya ko na nakilala kita <br>
+Ning maging close pa lang tayo sa games alam kong masaya at komportable na ako sayo.<br>
+Lalo na nung mas lumalim yung connection nating dalawa, binigyan mo ako ng rason para mangarap ulit para sa future na matagal ko nang kinalimutan 🥺<br><br>
+
+Thank you kasi kahit papaano yung galit ko ay nakokontrol ko na unlike before.<br>
+Hindi lang tayo yung masaya kapag stable yung isip ko, pati na rin pamilya ko love.<br>
+Salamat at dumating ka sa buhay ko <br><br>
+
+Sobrang dami kong gustong gawin kasama ka at ayokong doon na lang matapos yon,<br>
+dahil gusto ko pang makita na may maliit na batang tatawag satin ng mommy at daddy 💙<br><br>
+
+I love you so much love, sana ramdam mo kung gaano kita kamahal.<br>
+Lalo na sa mga oras na hindi ako makausap, kahit ganoon ikaw lang lagi ang natatakbo sa isip ko <br><br>
+
+Ingatan mo sarili mo dahil meron kang ako na laging naghihintay sayo 💙💙💙<br><br>
+
+<div style="text-align:center; font-weight:bold; color:#6fdcff; line-height:1.8;">
 
 Happy birthday love love! 💖<br>
 Happy birthday love loveeee! 🎉<br>
@@ -242,20 +285,31 @@ Happy birthday to youu 💐💙
 const music = document.getElementById("bgMusic");
 
 function openGift(){
+
   music.currentTime = 40;
   music.volume = 1;
   music.play();
 
-  document.getElementById("popup").classList.add("show");
+  document.getElementById("popup")
+  .classList.add("show");
 
   for(let i=0;i<70;i++){
+
     let h = document.createElement("div");
     h.classList.add("heart");
-    h.innerHTML = ["💖","💙","💘","🌷","🌹","💐"][Math.floor(Math.random()*6)];
+
+    h.innerHTML =
+    ["💖","💙","💘","🌷","🌹","💐"]
+    [Math.floor(Math.random()*6)];
+
     h.style.left = Math.random()*100 + "vw";
     h.style.top = "80vh";
+
     document.body.appendChild(h);
-    setTimeout(()=>h.remove(),4000);
+
+    setTimeout(()=>{
+      h.remove();
+    },4000);
   }
 
   tulipExplosion();
@@ -263,15 +317,20 @@ function openGift(){
 }
 
 function tulipExplosion(){
-  const cx = window.innerWidth/2;
-  const cy = window.innerHeight/2;
 
-  const icons = ["🌷","💖","🌹","💐","💘"];
+  const cx = window.innerWidth / 2;
+  const cy = window.innerHeight / 2;
+
+  const icons = ["🌷","💖","🌹","💐","💘","🩵"];
 
   for(let i=0;i<80;i++){
+
     let el = document.createElement("div");
+
     el.classList.add("tulip");
-    el.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+
+    el.innerHTML =
+    icons[Math.floor(Math.random()*icons.length)];
 
     document.body.appendChild(el);
 
@@ -281,29 +340,53 @@ function tulipExplosion(){
     el.style.left = cx + "px";
     el.style.top = cy + "px";
 
-    el.style.setProperty("--x", Math.cos(angle)*dist + "px");
-    el.style.setProperty("--y", Math.sin(angle)*dist + "px");
+    el.style.setProperty(
+      "--x",
+      Math.cos(angle)*dist + "px"
+    );
 
-    setTimeout(()=>el.remove(),1200);
+    el.style.setProperty(
+      "--y",
+      Math.sin(angle)*dist + "px"
+    );
+
+    setTimeout(()=>{
+      el.remove();
+    },1200);
   }
 }
 
 function showGlowText(){
+
   let txt = document.createElement("div");
+
   txt.classList.add("glow-text");
+
   txt.innerHTML = "I LOVE YOU TOPAK 💖";
+
   document.body.appendChild(txt);
-  setTimeout(()=>txt.remove(),3000);
+
+  setTimeout(()=>{
+    txt.remove();
+  },3000);
 }
 
 function closePopup(){
-  document.getElementById("popup").classList.remove("show");
+
+  document.getElementById("popup")
+  .classList.remove("show");
+
   music.pause();
   music.currentTime = 0;
 }
 
-function goPrev(){ window.location.href="Hi me.html"; }
-function goClose(){ window.location.href="index.html"; }
+function goPrev(){
+  window.location.href="Hi me.html";
+}
+
+function goClose(){
+  window.location.href="index.html";
+}
 
 </script>
 
